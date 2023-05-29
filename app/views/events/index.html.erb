@@ -8,6 +8,7 @@
     <p><strong>Location:</strong> <%= event.location %></p>
     <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
     <p><strong>Time:</strong> <%= event.time.strftime("%I:%M %p") %></p>
+    <%= link_to "Attend", attendances_path(attendee_id: current_user.id, event_id: event.id) %>
   </div>
 <% end %>
 
