@@ -11,8 +11,13 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= link_to 'Profile', user_path(current_user) %>
+    <% end %>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>

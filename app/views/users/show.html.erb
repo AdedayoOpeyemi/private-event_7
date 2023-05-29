@@ -1,0 +1,16 @@
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+
+<%= @user.name %><br>
+<%= @user.username %><br>
+<%= @user.email %><br>
+
+<% @events.each do |event| %>
+  <div class="event">
+    <h3><%= event.title %></h3>
+    <p><%= event.description %></p>
+    <p><strong>Location:</strong> <%= event.location %></p>
+    <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
+    <p><strong>Time:</strong> <%= event.time.strftime("%I:%M %p") %></p>
+  </div>
+<% end %>
