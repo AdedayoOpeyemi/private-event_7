@@ -2,15 +2,20 @@
 
 
 <div class="event">
-<h3><%= @event.title %></h3>
-<p><%= @event.description %></p>
-<p><strong>Location:</strong> <%= @event.location %></p>
-<p><strong>Date:</strong> <%= @event.date.strftime("%B %d, %Y") %></p>
-<p><strong>Time:</strong> <%= @event.time.strftime("%I:%M %p") %></p>
-<%= button_to attend_unattend_text(@event), attend_unattend(@event), method: :post %>
+    <h3><%= @event.title %></h3>
+    <p><%= @event.description %></p>
+    <p><strong>Location:</strong> <%= @event.location %></p>
+    <p><strong>Date:</strong> <%= @event.date.strftime("%B %d, %Y") %></p>
+    <p><strong>Time:</strong> <%= @event.time.strftime("%I:%M %p") %></p>
+    <% if @event.creator == current_user %>
+        <%= link_to 'Edit event', edit_event_path(@event) %>
+        <%= button_to attend_unattend_text(@event), attend_unattend(@event), method: :post %>
+    <% end %>
 </div>
 
 
+
+<h3> Attendees </h3>
 <% @attendees.each do |attendee| %>
     <%= link_to attendee, style: 'text-decoration: none; color: #333' do %>
         <p><%= attendee.name %>

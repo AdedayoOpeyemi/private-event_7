@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root "events#index"
   devise_for :users
   resources :users, only: [:show]
-  resources :events, only: [:index, :create, :show, :destroy]
+  resources :events, only: [:index, :create, :show, :destroy, :edit]
   resources :attendances, only: [:create, :destroy]
 
   post '/events/:event_id/attend', to: 'attendances#attend', as: 'attend'
