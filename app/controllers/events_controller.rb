@@ -1,7 +1,15 @@
 class EventsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
+
   def index
-    @events = Event.all
+    @past_events = Event.past_events
+    @future_events = Event.future_events
     @event = Event.new
+  end
+
+  def show
+    @event = Event.find(params[:id])
+    @attendees = @event.attendees
   end
 
   def create

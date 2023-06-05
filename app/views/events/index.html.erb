@@ -1,14 +1,33 @@
 <h1>Events#index</h1>
 <p>Find me in app/views/events/index.html.erb</p>
 
-<% @events.each do |event| %>
+<h2> Past Events </h2>
+
+<% @past_events.each do |event| %>
   <div class="event">
-    <h3><%= event.title %></h3>
-    <p><%= event.description %></p>
+    <%= link_to event do %>
+      <h3><%= event.title %></h3>
+      <p><%= event.description %></p>
+    <% end %>
     <p><strong>Location:</strong> <%= event.location %></p>
     <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
     <p><strong>Time:</strong> <%= event.time.strftime("%I:%M %p") %></p>
-    <%= link_to "Attend", attendances_path(attendee_id: current_user.id, event_id: event.id) %>
+    <%= button_to attend_unattend_text(event), attend_unattend(event), method: :post %>
+  </div>
+<% end %>
+
+<h2> Future Events </h2>
+
+<% @future_events.each do |event| %>
+  <div class="event">
+    <%= link_to event do %>
+      <h3><%= event.title %></h3>
+      <p><%= event.description %></p>
+    <% end %>
+    <p><strong>Location:</strong> <%= event.location %></p>
+    <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
+    <p><strong>Time:</strong> <%= event.time.strftime("%I:%M %p") %></p>
+    <%= button_to attend_unattend_text(event), attend_unattend(event), method: :post %>
   </div>
 <% end %>
 

@@ -9,5 +9,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  
+  def attending_event?(event)
+    event.attendees.exists?(id)
+  end
 end

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:show]
   resources :events, only: [:index, :create, :show]
-  resources :attendances, only: [:create]
+  resources :attendances, only: [:create, :destroy]
+
+  post '/events/:event_id/attend', to: 'attendances#attend', as: 'attend'
+  post '/events/:event_id/unattend', to: 'attendances#unattend', as: 'unattend'
 
 end
