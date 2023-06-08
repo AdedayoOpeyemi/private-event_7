@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  before_action :check_permission, only: [:edit, :update, :destroy]
 
   def index
     @past_events = Event.past_events
@@ -43,6 +44,14 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :location, :date, :time)
+  end
+
+  def check_permission
+    @event = Event.find(params[:id])
+    if @event.creator != current_user
+      flash[:alert] = "You are unauthorized"
+      redirect_to root_path, alert: 'You are not permittd to make this change'
+    end
   end
 
 end
