@@ -28,8 +28,14 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
-    redirect_to user_path(current_user)
+    if @event.creator == current_user
+      @event.destroy
+      redirect_to user_path(current_user)
+    else
+      flash[:notice] = "Post created successfully."
+      flash[:alert] = "An error occurred while creating the post."
+      redirect_to root_path, alert: 'You are not permittd to make this change'
+    end
   end
 
 
