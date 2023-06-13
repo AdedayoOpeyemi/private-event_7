@@ -27,38 +27,11 @@
     <p><strong>Location:</strong> <%= event.location %></p>
     <p><strong>Date:</strong> <%= event.date.strftime("%B %d, %Y") %></p>
     <p><strong>Time:</strong> <%= event.time.strftime("%I:%M %p") %></p>
-    <%= button_to attend_unattend_text(event), attend_unattend(event), method: :post %>
-  </div>
-<% end %>
-
-<%= form_with(model: @event) do |form| %>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.date_field :date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :time %>
-    <%= form.time_field :time %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Create Event' %>
+    <% if event.invite_only == false %>
+      <%= button_to attend_unattend_text(event), attend_unattend(event), method: :post %>
+    <% else %>
+      <p>This is an invite only event</p>
+      <% end %>
   </div>
 <% end %>
 

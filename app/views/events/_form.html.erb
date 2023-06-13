@@ -24,6 +24,11 @@
     <%= form.time_field :time %>
   </div>
 
+  <div class="field">
+    <%= form.label :invite_only, "Invite Only event?" %>
+    <%= form.check_box :invite_only %>
+  </div>
+
   <div class="actions">
     <%= form.submit 'Create Event' %>
   </div>
