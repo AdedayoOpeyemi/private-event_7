@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  before_action :check_permission, only: [:edit, :update, :destroy]
   # def new
   #   @event = Event.find(params[:event_id])
   #   @invitation = Invitation.new
@@ -19,5 +20,13 @@ class InvitationsController < ApplicationController
 
   def invitation_params
     params.require(:invitation).permit(user_ids: [])
+  end
+
+  def check_permission
+    @event = Event.find(params[:event_id])
+    if @event.creator != current_user
+      flash[:alert] = "You are unauthorized"
+      redirect_to root_path, alert: 'You are not permittd to send invitations out'
+    end
   end
 end
