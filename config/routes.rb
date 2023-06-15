@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'invitations/new'
+  get 'invitations/create'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,7 +10,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :events, only: [:index, :create, :show, :destroy, :edit]
   resources :attendances, only: [:create, :destroy]
-
+  
+  post '/invitation/:event_id/invite', to: 'invitations#create', as: 'event_invitations'
   post '/events/:event_id/attend', to: 'attendances#attend', as: 'attend'
   post '/events/:event_id/unattend', to: 'attendances#unattend', as: 'unattend'
 

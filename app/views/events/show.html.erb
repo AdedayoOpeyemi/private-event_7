@@ -14,6 +14,20 @@
     <%= button_to attend_unattend_text(@event), attend_unattend(@event), method: :post %>
 </div>
 
+<!-- app/views/invitations/new.html.erb -->
+<h1>New Invitation</h1>
+
+<%= form_with(model: [@event, @invitation]) do |form| %>
+  <%= form.hidden_field :event_id %>
+
+  <div>
+    <%= form.label :user_ids, 'Users' %>
+    <%= form.collection_select :user_ids, User.where.not(id: @event.attendees.select(:id)), :id, :name, {}, { multiple: true } %>
+  </div>
+
+  <%= form.submit 'Send Invitations' %>
+<% end %>
+
 
 
 <h3> Attendees </h3>
@@ -23,3 +37,11 @@
         <span><%= attendee.username %></span></p>
     <% end %>
 <% end %>
+
+
+<h3>Invitations</h3>
+
+<% @invitations.each do |invite| %>
+    <p><%= invite.user.name %>
+    <p><%= invite.status %>
+ <% end %>
