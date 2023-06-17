@@ -19,4 +19,9 @@ class Invitation < ApplicationRecord
   def decline!
     update(accepted: false, declined: true)
   end
+
+  def responded?
+    accepted? || declined? 
+  end
+  
 end
