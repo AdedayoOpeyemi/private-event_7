@@ -11,4 +11,12 @@ class Invitation < ApplicationRecord
       'pending'
     end
   end
+
+  def accept!
+    update(accepted: true, declined: false)
+  end
+
+  def decline!
+    update(accepted: false, declined: true)
+  end
 end

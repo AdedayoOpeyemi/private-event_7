@@ -16,6 +16,13 @@ class InvitationsController < ApplicationController
     redirect_to @event, notice: 'Invitations sent successfully!'
   end
 
+  def accept_invitation
+
+  end
+
+  def decline_invitation
+  end
+
   private
 
   def invitation_params
@@ -28,5 +35,9 @@ class InvitationsController < ApplicationController
       flash[:alert] = "You are unauthorized"
       redirect_to root_path, alert: 'You are not permittd to send invitations out'
     end
+  end
+
+  def permitted_to_accept_decline
+    # @invitation = 
   end
 end
